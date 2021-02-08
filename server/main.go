@@ -1,6 +1,7 @@
-package server
+package main
 
 import (
+	"context"
 	"gRPC/pb"
 	"log"
 	"net"
@@ -11,8 +12,19 @@ import (
 type server struct {
 }
 
+func (*server) Hello(ctx context.Context, request *pb.HelloRequest) (*pb.HelloResponse, error) {
+	result := "Hello" + request.GetName()
+
+	//create response
+	response := &pb.HelloResponse{
+		Msg: result,
+	}
+
+	return response, nil
+}
+
 func main() {
-	listener, err := net.Listen("tpc", "0.0.0.0:5001")
+	listener, err := net.Listen("tcp", "0.0.0.0:5001")
 
 	if err != nil {
 		log.Fatalf("Failed to listen %v", err)
