@@ -13,7 +13,7 @@ type server struct {
 }
 
 func (*server) Hello(ctx context.Context, request *pb.HelloRequest) (*pb.HelloResponse, error) {
-	result := "Hello" + request.GetName()
+	result := "Hello " + request.GetName()
 
 	//create response
 	response := &pb.HelloResponse{
@@ -24,7 +24,7 @@ func (*server) Hello(ctx context.Context, request *pb.HelloRequest) (*pb.HelloRe
 }
 
 func main() {
-	listener, err := net.Listen("tcp", "0.0.0.0:5001")
+	listener, err := net.Listen("tcp", "0.0.0.0:50051")
 
 	if err != nil {
 		log.Fatalf("Failed to listen %v", err)
